@@ -20,8 +20,6 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
-
 ```
 include_recipe "consul::install"
 ```
@@ -66,7 +64,7 @@ end
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/itamae-plugin-recipe-consul/fork )
+1. Fork it ( https://github.com/toritori0318/itamae-plugin-recipe-consul/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
