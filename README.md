@@ -20,11 +20,35 @@ Or install it yourself as:
 
 ## Usage
 
-```
+### Install
+
+```ruby
 include_recipe "consul::install"
+
+include_recipe "consul::enable"
+include_recipe "consul::disable"
 ```
 
+### node.json example
+
+```json
+{
+  "consul": {
+    "node_name": "consul-server",
+    "log_level": "info",
+    "bootstrap_expect": 1,
+    "bind_addr": "0.0.0.0",
+    "client_addr": "0.0.0.0",
+    "server": true,
+    "webui": true,
+    "template": true
+  }
+}
 ```
+
+### Generate Config
+
+```ruby
 # create consul config
 consul_config "/etc/consul.d/consul.json" do
   datacenter "east-aws"
