@@ -49,6 +49,19 @@ EOH
   end
 end
 
+# install consul template
+if node['consul']['template'] then
+  execute "install consul template" do
+    command <<-"EOH"
+cd /tmp
+curl -L -O #{node['consul']['template_binary_url']}
+tar zxvf consul-template_#{node['consul']['template_version']}_linux_amd64.tar.gz
+mv ./consul-template_#{node['consul']['template_version']}_linux_amd64/consul-template #{node['consul']['install_dir']}/consul-template
+EOH
+    not_if "test -e #{node['consul']['install_dir']}/consul-template"
+  end
+end
+
 template "/etc/init.d/consul" do
   source File.expand_path(File.dirname(__FILE__)) + "/initscript.erb"
   variables(node['consul'])
