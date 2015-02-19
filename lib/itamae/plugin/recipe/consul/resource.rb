@@ -5,7 +5,7 @@ define :render_config_template, category:nil, parameter: {} do
 
   tparams = {}
   params[:parameter].to_hash.each do |key, value|
-    next if key == "name" || key == "action"
+    next if key == "filepath" || key == "action"
     tparams[key] = value if value
   end
 
@@ -16,7 +16,7 @@ define :render_config_template, category:nil, parameter: {} do
     render_param = tparams
   end
 
-  template params[:parameter]["name"] do
+  template params[:parameter]["filepath"] do
     source File.expand_path(File.dirname(__FILE__)) + "/config.json.erb"
     variables(json: JSON.generate(render_param) )
     mode "644"
@@ -71,7 +71,9 @@ define :consul_config,
     verify_incoming: nil,
     verify_outgoing: nil,
     watches: nil do
+
   params = self.params
+  params[:filepath] = params[:name]
   render_config_template "render template" do
     parameter params.to_hash()
   end
@@ -85,6 +87,8 @@ define :consul_check_config,
     ttl: nil do
 
   params = self.params
+  params[:filepath] = params[:name]
+  params[:name] = params.delete(:check_name)
   render_config_template "render template" do
     category  "check"
     parameter params.to_hash()
@@ -98,6 +102,8 @@ define :consul_service_config,
     check: nil do
 
   params = self.params
+  params[:filepath] = params[:name]
+  params[:name] = params.delete(:service_name)
   render_config_template "render template" do
     category  "service"
     parameter params.to_hash()
