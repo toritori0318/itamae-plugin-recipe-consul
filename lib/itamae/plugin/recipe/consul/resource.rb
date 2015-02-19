@@ -1,6 +1,6 @@
 require 'json'
 
-define :render_config_template, parameter: {} do
+define :render_config_template, category:nil, parameter: {} do
   params = self.params
 
   tparams = {}
@@ -9,9 +9,16 @@ define :render_config_template, parameter: {} do
     tparams[key] = value if value
   end
 
+  render_param = {}
+  if params[:category]
+    render_param = { "#{params[:category]}" => tparams }
+  else
+    render_param = tparams
+  end
+
   template params[:parameter]["name"] do
     source File.expand_path(File.dirname(__FILE__)) + "/config.json.erb"
-    variables(json: JSON.generate(tparams))
+    variables(json: JSON.generate(render_param) )
     mode "644"
     notifies :restart, "service[consul]", :delay
   end
@@ -79,6 +86,7 @@ define :consul_check_config,
 
   params = self.params
   render_config_template "render template" do
+    category  "check"
     parameter params.to_hash()
   end
 end
@@ -91,6 +99,7 @@ define :consul_service_config,
 
   params = self.params
   render_config_template "render template" do
+    category  "service"
     parameter params.to_hash()
   end
 end
