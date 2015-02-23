@@ -78,6 +78,7 @@ define :consul_config,
 
   params = self.params
   params[:filepath] = params[:name]
+  params.delete(:name)
   render_config_template "render template" do
     parameter params.to_hash()
   end
@@ -88,6 +89,9 @@ define :consul_check_config,
     check_name: nil,
     script: nil,
     interval: nil,
+    service_id: nil,
+    http: nil,
+    notes: nil,
     ttl: nil do
 
   params = self.params
