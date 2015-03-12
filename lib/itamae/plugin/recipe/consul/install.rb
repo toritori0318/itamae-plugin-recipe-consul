@@ -31,7 +31,7 @@ curl -L -O #{node['consul']['binary_url']}
 unzip #{node['consul']['version']}_linux_amd64.zip
 mv ./consul #{node['consul']['install_dir']}/consul
 EOH
-  not_if "test -e #{node['consul']['install_dir']}/consul && consul --version | grep -q 'v#{node['consul']['version']}'"
+  not_if "test -e #{node['consul']['install_dir']}/consul && #{node['consul']['install_dir']}/consul --version | grep -q 'v#{node['consul']['version']}'"
 end
 
 ui_dir = nil
