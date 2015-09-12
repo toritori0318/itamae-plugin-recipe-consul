@@ -91,6 +91,7 @@ define :consul_check_config,
     service_id: nil,
     http: nil,
     notes: nil,
+    timeout: nil,
     ttl: nil do
 
   params = self.params
