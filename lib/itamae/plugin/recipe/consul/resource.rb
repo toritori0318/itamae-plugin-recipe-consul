@@ -18,7 +18,7 @@ define :render_config_template, category:nil, parameter: {} do
 
   template params[:parameter]["filepath"] do
     source File.expand_path(File.dirname(__FILE__)) + "/config.json.erb"
-    variables(json: JSON.generate(render_param) )
+    variables(json: JSON.pretty_generate(render_param) )
     mode "644"
   end
 end
