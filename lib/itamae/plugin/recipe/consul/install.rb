@@ -28,7 +28,7 @@ execute "install consul" do
   command <<-"EOH"
 cd /tmp
 curl -L -O #{node['consul']['binary_url']}
-unzip #{node['consul']['version']}_linux_amd64.zip
+unzip consul_#{node['consul']['version']}_linux_amd64.zip
 mv ./consul #{node['consul']['install_dir']}/consul
 EOH
   not_if "test -e #{node['consul']['install_dir']}/consul && #{node['consul']['install_dir']}/consul --version | grep -q 'v#{node['consul']['version']}'"
@@ -55,8 +55,8 @@ if node['consul']['template'] then
     command <<-"EOH"
 cd /tmp
 curl -L -O #{node['consul']['template_binary_url']}
-tar zxvf consul-template_#{node['consul']['template_version']}_linux_amd64.tar.gz
-mv ./consul-template_#{node['consul']['template_version']}_linux_amd64/consul-template #{node['consul']['install_dir']}/consul-template
+unzip consul-template_#{node['consul']['template_version']}_linux_amd64.zip
+mv ./consul-template #{node['consul']['install_dir']}/consul-template
 EOH
     not_if "test -e #{node['consul']['install_dir']}/consul-template"
   end
