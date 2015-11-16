@@ -21,5 +21,5 @@ node['consul']['start_join']          = node['consul']['start_join'] || []
 
 # consul-template
 node['consul']['template']               = node['consul']['template']
-node['consul']['template_version']       = node['consul']['template_version'] || '0.11.0'
+node['consul']['template_version']       = node['consul']['template_version'] || '0.11.1'
 node['consul']['template_binary_url']    = node['consul']['template_binary_url'] || "https://github.com/hashicorp/consul-template/releases/download/v#{node['consul']['template_version']}/consul-template_#{node['consul']['template_version']}_linux_amd64.tar.gz"
