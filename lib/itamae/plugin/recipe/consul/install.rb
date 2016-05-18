@@ -42,7 +42,7 @@ if node['consul']['server'] && node['consul']['webui'] then
     command <<-"EOH"
 cd /tmp
 curl -L -O #{node['consul']['webui_binary_url']}
-unzip #{node['consul']['version']}_web_ui.zip
+unzip consul_#{node['consul']['version']}_web_ui.zip
 mv ./dist #{ui_dir}
 EOH
     not_if "test -e #{ui_dir}"

@@ -13,7 +13,7 @@ node['consul']['config_dir']          = node['consul']['config_dir'] || '/etc/co
 node['consul']['server']              = node['consul']['server'] || false
 
 # server ui
-node['consul']['webui_binary_url']    = node['consul']['webui_binary_url'] || "#{node['consul']['binary_baseurl']}/#{node['consul']['version']}_web_ui.zip"
+node['consul']['webui_binary_url']    = node['consul']['webui_binary_url'] || "#{node['consul']['binary_baseurl']}/#{node['consul']['version']}/consul_#{node['consul']['version']}_web_ui.zip"
 node['consul']['webui']               = node['consul']['webui']
 
 # client
